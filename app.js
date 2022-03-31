@@ -12,7 +12,8 @@ const modeBtn = document.querySelector('.btn-mode')
 input.addEventListener("keyup", (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
-    addTodo();
+    const todoContent = document.querySelector(".todo-input").value;
+    addTodo(todoContent);
     input.value = "";
   }
 });
@@ -42,8 +43,6 @@ const displayAllItems = () => {
   allBtn.classList.add('active')
   todoCount();
 }
-
-displayAllItems();
 
 allBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -112,10 +111,10 @@ const createTodo = (todoContent) => {
   return [todoItem, checkboxBtn, deleteBtn];
 }
 
-const addTodo = () => {
-  const todoContent = document.querySelector(".todo-input").value;
+const addTodo = (todoContent) => {
   const [todoItem, checkboxBtn, deleteBtn] = createTodo(todoContent);
   todoList.append(todoItem)
+  localStorage.setItem(todoContent, todoContent)
   displayAllItems();
 
   todoItem.addEventListener('click', (event) => {
@@ -142,6 +141,7 @@ const addTodo = () => {
     }
     if (event.target === deleteBtn || event.target === deleteBtn.querySelector('svg')) {
       removeTodo(todoItem);
+      localStorage.removeItem(todoContent)
       todoCount();
     }
   });
@@ -154,4 +154,16 @@ const removeTodo = (todoItem) => {
 modeBtn.addEventListener("click", (event) => {
   const body = document.querySelector('body');
   body.classList.toggle('dark');
+});
+
+window.storageSession = () => {
+  localStorage.clear();
+}
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    addTodo(localStorage.getItem(key));
+  }
+  displayAllItems();
 });

@@ -44,6 +44,7 @@ h4 {
   color: hsl(235deg 16% 44%);
   font-weight: 400;
   font-size: 20px;
+  word-wrap: break-word;
 }
 
 body.dark h4 {
