@@ -99,9 +99,11 @@ clearBtn.addEventListener("click", (event) => {
   })
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    let results = JSON.parse(localStorage.getItem(key));
-    if (results[1] === "completed") {
-      localStorage.removeItem(key);
+    if (key !== 'launchDate') {
+      let results = JSON.parse(localStorage.getItem(key));
+      if (results[1] === "completed") {
+        localStorage.removeItem(key);
+      }
     }
   }
   displayAllItems();
