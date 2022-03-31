@@ -5,20 +5,26 @@ const allBtn = document.querySelector(".btn-all")
 const activeBtn = document.querySelector(".btn-active")
 const completedBtn = document.querySelector(".btn-completed")
 const clearBtn = document.querySelector(".btn-clear")
+const btns = [allBtn, completedBtn, clearBtn]
 
 const todoCount = () => {
   count.innerText = todoList.querySelectorAll('.display').length;
+}
+
+const deactivateBtns = () => {
+  btns.forEach((btn) => {
+    btn.classList.remove('active');
+  });
 }
 
 const displayAllItems = () => {
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
     item.style.display = 'block';
-    item.classList.add('display')
+    item.classList.add('display');
   })
+  deactivateBtns();
   allBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
   todoCount();
 }
 
@@ -41,10 +47,9 @@ activeBtn.addEventListener("click", (event) => {
     item.style.display = 'none';
     item.classList.remove('display')
   })
-  todoCount();
+  deactivateBtns();
   activeBtn.classList.add('active')
-  allBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
+  todoCount();
 })
 
 completedBtn.addEventListener("click", (event) => {
@@ -59,10 +64,9 @@ completedBtn.addEventListener("click", (event) => {
     item.style.display = 'block';
     item.classList.add('display')
   })
-  todoCount();
+  deactivateBtns();
   completedBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  allBtn.classList.remove('active')
+  todoCount();
 })
 
 clearBtn.addEventListener("click", (event) => {
@@ -86,21 +90,15 @@ const createTodo = (todoContent) => {
     </button>
   `;
   const label = todoItem.querySelector('label');
-  const text = todoItem.querySelector('h3');
   const deleteBtn = todoItem.querySelector('.btn-delete');
-  return [todoItem, label, text, deleteBtn];
+  return [todoItem, label, deleteBtn];
 }
 
 const addTodo = () => {
   const todoContent = document.querySelector(".todo-input").value;
-  const [todoItem, label, text, deleteBtn] = createTodo(todoContent);
+  const [todoItem, label, deleteBtn] = createTodo(todoContent);
   todoList.append(todoItem)
   displayAllItems();
-
-  const todoItems = document.querySelectorAll(".todo-item");
-  todoItems.forEach((item) => {
-    item.style.display = 'block';
-  })
 
   todoItem.addEventListener('click', (event) => {
     if (event.target === label || label.querySelector('input')) {
@@ -111,8 +109,8 @@ const addTodo = () => {
             todoItem.classList.remove('display')
             todoCount();
           }
-        } else {
-          todoItem.classList.add('completed');
+        } else if (!label.querySelector('input').checked) {
+          todoItem.classList.remove('completed');
           if (completedBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
             todoItem.classList.remove('display')
