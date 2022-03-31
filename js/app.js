@@ -222,11 +222,13 @@ window.storageSession = () => {
 window.addEventListener("DOMContentLoaded", (event) => {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    let results = JSON.parse(localStorage.getItem(key));
-    if (results[1] === "active") {
-      addTodo(results[0], "active");
-    } else if (results[1] === "completed") {
-      addTodo(results[0], "completed");
+    if (key !== 'launchDate') {
+      let results = JSON.parse(localStorage.getItem(key));
+      if (results[1] === "active") {
+        addTodo(results[0], "active");
+      } else if (results[1] === "completed") {
+        addTodo(results[0], "completed");
+      }
     }
   }
   displayAllItems();
