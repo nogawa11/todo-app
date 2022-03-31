@@ -8,12 +8,13 @@
   </head>
   <body>
     <h1>Todo</h1>
-    <input class="input" name="input" type="text">
-    <div class="main">
-      <div class="list"></div>
-      <div class="bottom-navbar">
+    <input class="todo-input" name="todo-input" type="text">
+    <button class="btn-submit" type="submit">Submit</button>
+    <div class="container">
+      <div class="todo-list"></div>
+      <div class="todo-navbar">
         <h5>
-          <span class="items-left"></span>
+          <span id="count"></span>
           items left
         </h5>
       <button class="btn-all">All</button>
@@ -23,5 +24,6 @@
       </div>
     </div
     Drag and drop to reorder list>
+    <script src="app.js"></script>
   </body>
 </html>
