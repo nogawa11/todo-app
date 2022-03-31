@@ -20,6 +20,7 @@ body.dark .todo-container {
 }
 
 .all-complete {
+  display: flex;
   justify-content: center;
   text-align: center;
   width: 100%;
