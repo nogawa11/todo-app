@@ -1,0 +1,67 @@
+.todo-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+h5, .btn-clear {
+  background-color: rgba(0,0,0,0);
+  color: hsl(236, 9%, 67%);
+  font-family: inherit;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  transition: 0.5s;
+}
+
+body.dark h5, body.dark .btn-clear {
+  color: hsl(235deg 16% 44%);
+}
+
+.btn-clear:hover {
+  color: hsl(235deg 16% 44%);
+}
+
+body.dark .btn-clear:hover {
+  color:  rgb(179, 180, 216);
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  padding-left: 38px;
+}
+
+.btn-all, .btn-active, .btn-completed {
+  background-color: rgba(0,0,0,0);
+  color: hsl(236, 8%, 60%);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  transition: 0.5s;
+}
+
+body.dark .btn-all, body.dark .btn-active, body.dark .btn-completed {
+  color: hsl(235deg 16% 44%);
+}
+
+body.dark .btn-all:hover, body.dark .btn-active:hover, body.dark .btn-completed:hover {
+  color: rgb(179, 180, 216);
+}
+
+.btn-all:hover, .btn-active:hover, .btn-completed:hover {
+  color: hsl(235deg 16% 44%);
+}
+
+.btn-all.active, .btn-active.active, .btn-completed.active {
+  color: hsl(220, 98%, 61%);
+}
+
+body.dark .btn-all.active, body.dark .btn-active.active, body.dark .btn-completed.active {
+  color: hsl(220, 98%, 61%);
+}

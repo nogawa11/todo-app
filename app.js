@@ -7,6 +7,7 @@ const clearBtn = document.querySelector(".btn-clear")
 const btns = [allBtn, activeBtn, completedBtn]
 const input = document.querySelector("input")
 const allComplete = document.querySelector(".all-complete")
+const modeBtn = document.querySelector('.btn-mode')
 
 input.addEventListener("keyup", (event) => {
   if (event.key === 'Enter') {
@@ -149,3 +150,8 @@ const addTodo = () => {
 const removeTodo = (todoItem) => {
   todoItem.remove();
 }
+
+modeBtn.addEventListener("click", (event) => {
+  const body = document.querySelector('body');
+  body.classList.toggle('dark');
+});

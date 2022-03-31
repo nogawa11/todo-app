@@ -1,0 +1,133 @@
+.todo-container {
+  background-color: white;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0px 15px 50px 10px rgb(62 70 132 / 11%);
+  margin-top: 20px;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+body.dark .todo-container {
+  background-color: hsl(235, 23%, 22%);
+  box-shadow: 0px 15px 40px 10px rgba(16, 17, 31, 0.11);
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+.all-complete {
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
+}
+
+body.dark .all-complete{
+  border-bottom: 1px solid hsl(235deg 18% 31%);
+}
+
+.todo-item {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
+}
+
+body.dark .todo-item {
+  border-bottom: 1px solid hsl(235deg 18% 31%);
+}
+
+h4 {
+  color: hsl(235deg 16% 44%);
+  font-weight: 400;
+  font-size: 20px;
+}
+
+body.dark h4 {
+  color: rgb(179, 180, 216);
+}
+
+.todo-item.completed h4 {
+  color: hsl(236, 23%, 87%);
+  text-decoration: line-through;
+}
+
+body.dark .todo-item.completed h4 {
+  color: hsl(235deg 16% 44%);
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+}
+
+.btn-checkbox {
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  margin: 0 24px;
+  border: 1px solid hsl(236, 33%, 92%);
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+body.dark .btn-checkbox {
+  border: 1px solid hsl(237, 15%, 29%);
+}
+
+.btn-checkbox:hover, body.dark .btn-checkbox:hover {
+  background: linear-gradient(320deg, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+  border: 0;
+}
+
+.btn-checkbox.checked {
+  background: linear-gradient(320deg, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+  border: 0;
+}
+
+i {
+  color: white;
+  font-size: 10px;
+  transition: 0.5s;
+  display: block;
+}
+
+.btn-checkbox:hover i {
+  background-color: white;
+  display: block !important;
+  padding: 6px;
+  border-radius: 50%;
+  border: 0;
+}
+
+body.dark .btn-checkbox:hover i {
+  background-color:  hsl(235, 23%, 22%);
+  color:hsl(235, 23%, 22%);
+  padding: 6px;
+}
+
+.btn-checkbox.checked:hover i, body.dark .btn-checkbox.checked:hover i {
+  background-color: rgba(0,0,0,0);
+  display: block !important;
+  padding: 0;
+  border-radius: none;
+  color: white;
+}
+
+
+.btn-delete {
+  background: none;
+  border: 0;
+  margin: 0 24px;
+  transition: 0.5s;
+}
+
+.todo-item:hover .btn-delete {
+  display: block !important;
+}
