@@ -19,6 +19,11 @@ body.dark .todo-container {
   transition-delay: 0s;
 }
 
+.draggable {
+  cursor: move;
+  user-select: none;
+}
+
 .all-complete {
   justify-content: center;
   text-align: center;
