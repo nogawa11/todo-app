@@ -78,6 +78,7 @@ h1 {
   text-align: center;
   padding: 8px 0;
   border-bottom: 1px solid hsl(236, 33%, 92%);
+  justify-content: center;
 }
 
 h4 {
@@ -125,6 +126,22 @@ h5, .btn-clear {
   font-family: inherit;
   transition: 0.5s;
 }
+
 .btn-all:hover, .btn-active:hover, .btn-completed:hover {
   color: hsl(220, 98%, 61%);
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+}
+
+.todo-item {
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[type="checkbox"]{
+  border-radius: 50%;
+  background-color:rgb(81, 253, 58);
 }

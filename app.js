@@ -6,6 +6,7 @@ const completedBtn = document.querySelector(".btn-completed")
 const clearBtn = document.querySelector(".btn-clear")
 const btns = [allBtn, activeBtn, completedBtn]
 const input = document.querySelector("input")
+const allComplete = document.querySelector(".all-complete")
 
 input.addEventListener("keyup", (event) => {
   if (event.key === 'Enter') {
@@ -17,12 +18,9 @@ input.addEventListener("keyup", (event) => {
 const todoCount = () => {
   count.innerText = todoList.querySelectorAll('.display').length;
   if (todoList.querySelectorAll('.display').length === 0) {
-    todoList.innerHTML=
-    `
-      <div class="all-complete">
-        <h4>All complete!</h4>
-      </div>
-    `;
+    allComplete.style.display = 'flex';
+  } else {
+    allComplete.style.display = 'none';
   }
 }
 
@@ -35,7 +33,7 @@ const deactivateBtns = () => {
 const displayAllItems = () => {
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
-    item.style.display = 'block';
+    item.style.display = 'flex';
     item.classList.add('display');
   })
   deactivateBtns();
@@ -54,7 +52,7 @@ activeBtn.addEventListener("click", (event) => {
   event.preventDefault();
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
-    item.style.display = 'block';
+    item.style.display = 'flex';
     item.classList.add('display')
   })
   const completedTodoItems = document.querySelectorAll(".completed");
@@ -76,7 +74,7 @@ completedBtn.addEventListener("click", (event) => {
   })
   const completedTodoItems = document.querySelectorAll(".completed");
   completedTodoItems.forEach((item) => {
-    item.style.display = 'block';
+    item.style.display = 'flex';
     item.classList.add('display')
   })
   deactivateBtns();
@@ -97,34 +95,40 @@ const createTodo = (todoContent) => {
   const todoItem = document.createElement('div');
   todoItem.className = 'todo-item';
   todoItem.innerHTML = `
-    <label for="status" class="todo-check-label">
-    <input type="checkbox" name="status" class="todo-check">
-    <h3>${todoContent}</h3>
+    <div class="todo-left">
+      <button class="btn-checkbox">
+        <i class="fas fa-check"></i>
+      </button>
+      <h4>${todoContent}</h4>
+    </div>
     <button class="btn-delete">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
     </button>
   `;
-  const label = todoItem.querySelector('label');
+  const checkboxBtn = todoItem.querySelector('.btn-checkbox');
   const deleteBtn = todoItem.querySelector('.btn-delete');
-  return [todoItem, label, deleteBtn];
+  return [todoItem, checkboxBtn, deleteBtn];
 }
 
 const addTodo = () => {
   const todoContent = document.querySelector(".todo-input").value;
-  const [todoItem, label, deleteBtn] = createTodo(todoContent);
+  const [todoItem, checkboxBtn, deleteBtn] = createTodo(todoContent);
   todoList.append(todoItem)
   displayAllItems();
 
   todoItem.addEventListener('click', (event) => {
-    if (event.target === label || label.querySelector('input')) {
-        if (label.querySelector('input').checked) {
+    if (event.target === checkboxBtn || checkboxBtn.querySelector('i')) {
+        if (!checkboxBtn.classList.contains('checked')) {
+          checkboxBtn.classList.add('checked')
           todoItem.classList.add('completed');
+          console.log('checked!')
           if (activeBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
             todoItem.classList.remove('display')
             todoCount();
           }
-        } else if (!label.querySelector('input').checked) {
+        } else if (checkboxBtn.classList.contains('checked')) {
+          checkboxBtn.classList.remove('checked')
           todoItem.classList.remove('completed');
           if (completedBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
