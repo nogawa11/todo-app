@@ -1,14 +1,29 @@
 const todoList = document.querySelector(".todo-list")
 const count = document.querySelector('#count');
-const submitBtn = document.querySelector(".btn-submit")
 const allBtn = document.querySelector(".btn-all")
 const activeBtn = document.querySelector(".btn-active")
 const completedBtn = document.querySelector(".btn-completed")
 const clearBtn = document.querySelector(".btn-clear")
-const btns = [allBtn, completedBtn, clearBtn]
+const btns = [allBtn, activeBtn, completedBtn]
+const input = document.querySelector("input")
+
+input.addEventListener("keyup", (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addTodo();
+  }
+});
 
 const todoCount = () => {
   count.innerText = todoList.querySelectorAll('.display').length;
+  if (todoList.querySelectorAll('.display').length === 0) {
+    todoList.innerHTML=
+    `
+      <div class="all-complete">
+        <h4>All complete!</h4>
+      </div>
+    `;
+  }
 }
 
 const deactivateBtns = () => {
@@ -128,8 +143,3 @@ const addTodo = () => {
 const removeTodo = (todoItem) => {
   todoItem.remove();
 }
-
-submitBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  addTodo();
-});

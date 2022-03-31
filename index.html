@@ -5,25 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
     <title>Frontend Mentor | Todo app</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Todo</h1>
-    <input class="todo-input" name="todo-input" type="text">
-    <button class="btn-submit" type="submit">Submit</button>
-    <div class="container">
-      <div class="todo-list"></div>
-      <div class="todo-navbar">
-        <h5>
-          <span id="count"></span>
-          items left
-        </h5>
-      <button class="btn-all">All</button>
-      <button class="btn-active">Active</button>
-      <button class="btn-completed">Completed</button>
-      <button class="btn-clear">Clear Completed</button>
+    <div class="header"></div>
+    <div class="flex-container">
+      <div class="container">
+        <h1>Todo</h1>
+        <div class="todo-form">
+          <span class="circle"></span>
+          <input class="todo-input" name="todo-input" type="text" placeholder="Create a new todo...">
+        </div>
+        <div class="todo-container">
+          <div class="todo-list"></div>
+          <div class="todo-navbar">
+            <h5>
+              <span id="count"></span>
+              items left
+            </h5>
+            <div class="buttons">
+              <button class="btn-all">All</button>
+              <button class="btn-active">Active</button>
+              <button class="btn-completed">Completed</button>
+            </div>
+            <button class="btn-clear">Clear Completed</button>
+          </div>
+        </div>
       </div>
-    </div
-    Drag and drop to reorder list>
+    </div>
+    <!-- Drag and drop to reorder list -->
     <script src="app.js"></script>
   </body>
 </html>

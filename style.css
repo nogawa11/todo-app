@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background-color:hsl(0, 0%, 98%);
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-image: url('images/bg-desktop-light.jpg');
+  height: 280px;
+  position: relative;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.container {
+  width: 540px;
+  position: absolute;
+  top: 56px;
+}
+
+h1 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.todo-form > input {
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  height: 64px;
+  box-sizing: border-box;
+}
+
+.todo-form > input[type="text"] {
+  color: hsl(235, 19%, 35%);
+  font-size: 18px;
+  padding-left: 68px;
+  font-family: inherit;
+}
+
+.todo-form > input::placeholder {
+  color: hsl(236, 9%, 67%);
+  font-size: 18px;
+  font-family: inherit;
+}
+
+.circle {
+  height: 22px;
+  width: 22px;
+  border: 1px solid hsl(236, 33%, 92%);
+  border-radius: 50%;
+  position: absolute;
+  top: 115px;
+  left: 22px;
+}
+
+.todo-container {
+  background-color: white;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0px 15px 50px 10px rgb(62 70 132 / 11%);
+  margin-top: 20px;
+}
+
+.all-complete {
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 19px;
+  color: hsl(235deg 16% 44%);
+}
+
+.todo-navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+h5, .btn-clear {
+  color: hsl(236, 9%, 67%);
+  font-weight: 400;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: inherit;
+  transition: 0.5s;
+}
+
+.btn-clear:hover {
+  color: hsl(235deg 16% 44%);
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  padding-left: 38px;
+}
+
+.btn-all, .btn-active, .btn-completed {
+  color: hsl(236, 8%, 60%);
+  font-weight: 600;
+  font-size: 15px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: inherit;
+  transition: 0.5s;
+}
+.btn-all:hover, .btn-active:hover, .btn-completed:hover {
+  color: hsl(220, 98%, 61%);
+}
