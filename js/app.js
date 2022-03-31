@@ -111,7 +111,8 @@ const createTodo = (todoContent, status) => {
   const todoItem = document.createElement("div");
   let item = [];
   if (status === "active") {
-    todoItem.className = "todo-item draggable";
+    todoItem.className = "todo-item";
+    todoItem.draggable = true;
     todoItem.innerHTML = `
       <div class="todo-left">
         <button class="btn-checkbox">
@@ -125,7 +126,8 @@ const createTodo = (todoContent, status) => {
     `;
     item = [todoContent, "active"];
   } else if (status === "completed") {
-    todoItem.className = "todo-item completed draggable";
+    todoItem.className = "todo-item completed";
+    todoItem.draggable = true;
     todoItem.innerHTML = `
       <div class="todo-left">
         <button class="btn-checkbox checked">
@@ -183,6 +185,25 @@ const addTodo = (todoContent, status) => {
       todoCount();
     }
   });
+
+  todoItem.addEventListener('dragstart', e => {
+    todoItem.classList.add('ondrag');
+  });
+
+  todoItem.addEventListener('dragend', (event) => {
+    todoItem.classList.remove('ondrag');
+  });
+
+  todoList.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    const afterElement = getDragAfterElement(todoList, event.clientY);
+    const draggable = document.querySelector('.ondrag');
+    if (afterElement == null) {
+        todoList.appendChild(draggable);
+    } else {
+        todoList.insertBefore(draggable, afterElement);
+    }
+  });
 }
 
 const removeTodo = (todoItem) => {
@@ -210,3 +231,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
   displayAllItems();
 });
+
+const getDragAfterElement = (container, y) => {
+  const draggableElements = [...container.querySelectorAll('.todo-item:not(.ondrag)')]
+  return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+      } else {
+          return closest;
+      }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
