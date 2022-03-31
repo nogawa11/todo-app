@@ -1,6 +1,6 @@
-const submitBtn = document.querySelector(".btn-submit")
 const todoList = document.querySelector(".todo-list")
 const count = document.querySelector('#count');
+const submitBtn = document.querySelector(".btn-submit")
 const allBtn = document.querySelector(".btn-all")
 const activeBtn = document.querySelector(".btn-active")
 const completedBtn = document.querySelector(".btn-completed")
@@ -16,18 +16,63 @@ const displayAllItems = () => {
     item.style.display = 'block';
     item.classList.add('display')
   })
-  todoCount();
   allBtn.classList.add('active')
   activeBtn.classList.remove('active')
   completedBtn.classList.remove('active')
+  todoCount();
 }
 
 displayAllItems();
 
-submitBtn.addEventListener("click", (event) => {
+allBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  addTodo();
-});
+  displayAllItems();
+})
+
+activeBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  const todoItems = document.querySelectorAll(".todo-item");
+  todoItems.forEach((item) => {
+    item.style.display = 'block';
+    item.classList.add('display')
+  })
+  const completedTodoItems = document.querySelectorAll(".completed");
+  completedTodoItems.forEach((item) => {
+    item.style.display = 'none';
+    item.classList.remove('display')
+  })
+  todoCount();
+  activeBtn.classList.add('active')
+  allBtn.classList.remove('active')
+  completedBtn.classList.remove('active')
+})
+
+completedBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  const todoItems = document.querySelectorAll(".todo-item");
+  todoItems.forEach((item) => {
+    item.style.display = 'none';
+    item.classList.remove('display')
+  })
+  const completedTodoItems = document.querySelectorAll(".completed");
+  completedTodoItems.forEach((item) => {
+    item.style.display = 'block';
+    item.classList.add('display')
+  })
+  todoCount();
+  completedBtn.classList.add('active')
+  activeBtn.classList.remove('active')
+  allBtn.classList.remove('active')
+})
+
+clearBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  const completedTodoItems = document.querySelectorAll(".completed");
+  completedTodoItems.forEach((item) => {
+    item.remove();
+  })
+  displayAllItems();
+})
 
 const createTodo = (todoContent) => {
   const todoItem = document.createElement('div');
@@ -61,14 +106,12 @@ const addTodo = () => {
     if (event.target === label || label.querySelector('input')) {
         if (label.querySelector('input').checked) {
           todoItem.classList.add('completed');
-          text.classList.add('strike');
           if (activeBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
             todoItem.classList.remove('display')
             todoCount();
           }
         } else {
-          text.classList.remove('strike');
           todoItem.classList.add('completed');
           if (completedBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
@@ -88,53 +131,7 @@ const removeTodo = (todoItem) => {
   todoItem.remove();
 }
 
-allBtn.addEventListener("click", (event) => {
+submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  displayAllItems();
-})
-
-activeBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  const todoItems = document.querySelectorAll(".todo-item");
-  todoItems.forEach((item) => {
-    item.style.display = 'block';
-    item.classList.add('display')
-  })
-  const completedTodoItems = document.querySelectorAll(".completed");
-  completedTodoItems.forEach((item) => {
-    item.style.display = 'none';
-    item.classList.remove('display')
-  })
-  todoCount();
-  activeBtn.classList.add('active')
-  allBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
-
-})
-
-completedBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  const todoItems = document.querySelectorAll(".todo-item");
-  todoItems.forEach((item) => {
-    item.style.display = 'none';
-    item.classList.remove('display')
-  })
-  const completedTodoItems = document.querySelectorAll(".completed");
-  completedTodoItems.forEach((item) => {
-    item.style.display = 'block';
-    item.classList.add('display')
-  })
-  todoCount();
-  completedBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  allBtn.classList.remove('active')
-})
-
-clearBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  const completedTodoItems = document.querySelectorAll(".completed");
-  completedTodoItems.forEach((item) => {
-    item.remove();
-  })
-  displayAllItems();
-})
+  addTodo();
+});
