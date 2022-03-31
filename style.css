@@ -5,6 +5,7 @@ body {
   background-color:hsl(0, 0%, 98%);
   margin: 0;
   padding: 0;
+  transition: 0.5s;
 }
 
 .header {
@@ -139,9 +140,81 @@ h5, .btn-clear {
 .todo-item {
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
 }
 
-input[type="checkbox"]{
+.todo-item.completed h4 {
+  color: hsl(236, 23%, 87%);
+  text-decoration: line-through;
+}
+
+.btn-checkbox {
   border-radius: 50%;
-  background-color:rgb(81, 253, 58);
+  height: 24px;
+  width: 24px;
+  margin: 0 24px;
+  border: 1px solid hsl(236, 33%, 92%);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.btn-checkbox:hover {
+  background: linear-gradient(320deg, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+  border: 0;
+}
+
+.btn-checkbox:hover i {
+  background-color: white;
+  display: block !important;
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.btn-checkbox.checked:hover i {
+  background-color: rgba(0,0,0,0);
+  display: block !important;
+  border-radius: none;
+  padding: 0;
+}
+
+.btn-checkbox.checked {
+  background: linear-gradient(320deg, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+  border: 0;
+}
+
+.btn-checkbox i {
+  display: block;
+}
+
+i {
+  color: white;
+  font-size: 10px;
+  transition: 0.5s;
+}
+
+.btn-delete {
+  border: 0;
+  background: none;
+  margin: 0 24px;
+  transition: 0.5s;
+}
+
+.todo-item:hover .btn-delete {
+  display: block !important;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-mode {
+  margin: 26px 0 32px 0;
+}
+
+.sun {
+  display: none;
 }

@@ -12,6 +12,7 @@ input.addEventListener("keyup", (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
     addTodo();
+    input.value = "";
   }
 });
 
@@ -97,11 +98,11 @@ const createTodo = (todoContent) => {
   todoItem.innerHTML = `
     <div class="todo-left">
       <button class="btn-checkbox">
-        <i class="fas fa-check"></i>
+        <i class="fas fa-check" style="display: none;"></i>
       </button>
       <h4>${todoContent}</h4>
     </div>
-    <button class="btn-delete">
+    <button class="btn-delete" style="display: none;">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
     </button>
   `;
@@ -119,9 +120,9 @@ const addTodo = () => {
   todoItem.addEventListener('click', (event) => {
     if (event.target === checkboxBtn || checkboxBtn.querySelector('i')) {
         if (!checkboxBtn.classList.contains('checked')) {
-          checkboxBtn.classList.add('checked')
+          checkboxBtn.classList.add('checked');
           todoItem.classList.add('completed');
-          console.log('checked!')
+          checkboxBtn.querySelector('i').style.display = 'block';
           if (activeBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
             todoItem.classList.remove('display')
@@ -130,6 +131,7 @@ const addTodo = () => {
         } else if (checkboxBtn.classList.contains('checked')) {
           checkboxBtn.classList.remove('checked')
           todoItem.classList.remove('completed');
+          checkboxBtn.querySelector('i').style.display = 'none';
           if (completedBtn.classList.contains('active')) {
             todoItem.style.display = 'none';
             todoItem.classList.remove('display')
