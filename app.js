@@ -6,21 +6,23 @@ const activeBtn = document.querySelector(".btn-active")
 const completedBtn = document.querySelector(".btn-completed")
 const clearBtn = document.querySelector(".btn-clear")
 
-
-const todoCount = (param) => {
-  const allCount = todoList.querySelectorAll('.todo-item').length;
-  const completedCount = todoList.querySelectorAll('.completed').length;
-  if (param ==='all') {
-    count.innerText = allCount;
-  } else if (param === 'active') {
-    count.innerText = (allCount - completedCount) || 0;
-  } else if (param === 'completed') {
-    count.innerText = completedCount;
-  }
+const todoCount = () => {
+  count.innerText = todoList.querySelectorAll('.display').length;
 }
 
-todoCount('all');
-allBtn.classList.add('active')
+const displayAllItems = () => {
+  const todoItems = document.querySelectorAll(".todo-item");
+  todoItems.forEach((item) => {
+    item.style.display = 'block';
+    item.classList.add('display')
+  })
+  todoCount();
+  allBtn.classList.add('active')
+  activeBtn.classList.remove('active')
+  completedBtn.classList.remove('active')
+}
+
+displayAllItems();
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -40,19 +42,15 @@ const createTodo = (todoContent) => {
   `;
   const label = todoItem.querySelector('label');
   const text = todoItem.querySelector('h3');
-  const todoCheck = todoItem.querySelector('.todo-check');
   const deleteBtn = todoItem.querySelector('.btn-delete');
-  return [todoItem, label, text, todoCheck, deleteBtn];
+  return [todoItem, label, text, deleteBtn];
 }
 
 const addTodo = () => {
   const todoContent = document.querySelector(".todo-input").value;
-  const [todoItem, label, text, todoCheck, deleteBtn] = createTodo(todoContent);
+  const [todoItem, label, text, deleteBtn] = createTodo(todoContent);
   todoList.append(todoItem)
-  todoCount('all');
-  allBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
+  displayAllItems();
 
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
@@ -64,14 +62,24 @@ const addTodo = () => {
         if (label.querySelector('input').checked) {
           todoItem.classList.add('completed');
           text.classList.add('strike');
+          if (activeBtn.classList.contains('active')) {
+            todoItem.style.display = 'none';
+            todoItem.classList.remove('display')
+            todoCount();
+          }
         } else {
           text.classList.remove('strike');
           todoItem.classList.add('completed');
+          if (completedBtn.classList.contains('active')) {
+            todoItem.style.display = 'none';
+            todoItem.classList.remove('display')
+            todoCount();
+          }
         }
     }
     if (event.target === deleteBtn || event.target === deleteBtn.querySelector('svg')) {
       removeTodo(todoItem);
-      todoCount('all');
+      todoCount();
     }
   });
 }
@@ -82,14 +90,7 @@ const removeTodo = (todoItem) => {
 
 allBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  const todoItems = document.querySelectorAll(".todo-item");
-  todoItems.forEach((item) => {
-    item.style.display = 'block';
-  })
-  todoCount('all');
-  allBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
+  displayAllItems();
 })
 
 activeBtn.addEventListener("click", (event) => {
@@ -97,15 +98,18 @@ activeBtn.addEventListener("click", (event) => {
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
     item.style.display = 'block';
+    item.classList.add('display')
   })
   const completedTodoItems = document.querySelectorAll(".completed");
   completedTodoItems.forEach((item) => {
     item.style.display = 'none';
+    item.classList.remove('display')
   })
-  todoCount('active');
+  todoCount();
   activeBtn.classList.add('active')
   allBtn.classList.remove('active')
   completedBtn.classList.remove('active')
+
 })
 
 completedBtn.addEventListener("click", (event) => {
@@ -113,12 +117,14 @@ completedBtn.addEventListener("click", (event) => {
   const todoItems = document.querySelectorAll(".todo-item");
   todoItems.forEach((item) => {
     item.style.display = 'none';
+    item.classList.remove('display')
   })
   const completedTodoItems = document.querySelectorAll(".completed");
   completedTodoItems.forEach((item) => {
     item.style.display = 'block';
+    item.classList.add('display')
   })
-  todoCount('completed');
+  todoCount();
   completedBtn.classList.add('active')
   activeBtn.classList.remove('active')
   allBtn.classList.remove('active')
@@ -130,8 +136,5 @@ clearBtn.addEventListener("click", (event) => {
   completedTodoItems.forEach((item) => {
     item.remove();
   })
-  todoCount('all');
-  allBtn.classList.add('active')
-  activeBtn.classList.remove('active')
-  completedBtn.classList.remove('active')
+  displayAllItems();
 })
