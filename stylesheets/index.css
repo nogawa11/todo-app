@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('components/card.css');
+@import url('components/form.css');
+@import url('components/navbar.css');
 
 body {
   background-color:hsl(0, 0%, 98%);
@@ -8,7 +11,7 @@ body {
 }
 
 .header {
-  background-image: url('images/bg-desktop-light.jpg');
+  background-image: url('../images/bg-desktop-light.jpg');
   position: relative;
   height: 280px;
 }
@@ -94,7 +97,6 @@ h1 {
   justify-content: center;
   text-align: center;
   width: 100%;
-  padding: 8px 0;
   border-bottom: 1px solid hsl(236, 33%, 92%);
 }
 
@@ -219,4 +221,39 @@ h5, .btn-clear {
 
 .btn-all:hover, .btn-active:hover, .btn-completed:hover {
   color: hsl(220, 98%, 61%);
+}
+
+/*-----media queries-----*/
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .container {
+    width: 90%;
+  }
+
+  .todo-navbar {
+    position: relative;
+  }
+
+  .buttons {
+    position: absolute;
+    display: flex;
+    gap: 16px;
+    background-color: white;
+    bottom: -82px;
+    padding: 24px 0;
+    left: 0;
+    border-radius: 4px;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0px 15px 40px 10px rgb(148 151 181 / 11%);
+  }
+
+  .btn-all, .btn-active, .btn-completed {
+    font-size: 18px;
+  }
 }
